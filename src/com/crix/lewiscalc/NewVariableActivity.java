@@ -24,7 +24,7 @@ public class NewVariableActivity extends Activity {
         etName = (EditText)findViewById(R.id.etName);
         etValue = (EditText)findViewById(R.id.etValue);
         try {
-			etValue.setText(String.valueOf(con.getVariable("ans")));
+			etValue.setText(String.valueOf(con.getVariable("ANS")));
 		} catch (UndefinedVariableException e) {
 			// Never reach here.
 		}

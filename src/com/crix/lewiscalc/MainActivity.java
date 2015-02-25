@@ -61,6 +61,7 @@ public class MainActivity extends Activity {
 	};
 	
 	private SelectVariableOperations operation = SelectVariableOperations.ADD;
+	private boolean untouchedAfterCalculation = false;
 	
 	private static List<String> history = new ArrayList<String>();
 	
@@ -73,6 +74,12 @@ public class MainActivity extends Activity {
         history.clear();
         
         etInput = (EditText)findViewById(R.id.etInput);
+        etInput.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				untouchedAfterCalculation = false;
+			}
+        });
         tvResult = (TextView)findViewById(R.id.tvResult);
         tvResult.setText("0.0");
         
@@ -80,7 +87,7 @@ public class MainActivity extends Activity {
         btn0.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("0");
+				putString("0");
 			}
         });
         
@@ -88,7 +95,7 @@ public class MainActivity extends Activity {
         btn1.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("1");
+				putString("1");
 			}
         });
         
@@ -96,7 +103,7 @@ public class MainActivity extends Activity {
         btn2.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("2");
+				putString("2");
 			}
         });
         
@@ -104,7 +111,7 @@ public class MainActivity extends Activity {
         btn3.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("3");
+				putString("3");
 			}
         });
         
@@ -112,7 +119,7 @@ public class MainActivity extends Activity {
         btn4.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("4");
+				putString("4");
 			}
         });
         
@@ -120,7 +127,7 @@ public class MainActivity extends Activity {
         btn5.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("5");
+				putString("5");
 			}
         });
         
@@ -128,7 +135,7 @@ public class MainActivity extends Activity {
         btn6.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("6");
+				putString("6");
 			}
         });
         
@@ -136,7 +143,7 @@ public class MainActivity extends Activity {
         btn7.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("7");
+				putString("7");
 			}
         });
         
@@ -144,7 +151,7 @@ public class MainActivity extends Activity {
         btn8.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("8");
+				putString("8");
 			}
         });
         
@@ -152,7 +159,7 @@ public class MainActivity extends Activity {
         btn9.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("9");
+				putString("9");
 			}
         });
         
@@ -160,7 +167,7 @@ public class MainActivity extends Activity {
         btnLParen.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("(");
+				putString("(");
 			}
         });
         
@@ -168,7 +175,7 @@ public class MainActivity extends Activity {
         btnRParen.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString(")");
+				putString(")");
 			}
         });
         
@@ -176,7 +183,7 @@ public class MainActivity extends Activity {
         btnPlus.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("+");
+				putString("ANS+", "+");
 			}
         });
         
@@ -184,7 +191,7 @@ public class MainActivity extends Activity {
         btnMinus.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("-");
+				putString("ANS-", "-");
 			}
         });
         
@@ -192,7 +199,7 @@ public class MainActivity extends Activity {
         btnTime.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("*");
+				putString("ANS*", "*");
 			}
         });
         
@@ -200,7 +207,7 @@ public class MainActivity extends Activity {
         btnDivide.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("/");
+				putString("ANS/", "/");
 			}
         });
         
@@ -216,6 +223,7 @@ public class MainActivity extends Activity {
 		        	con.setVariable("ANS", result);
 		        	tvResult.setText(String.valueOf(result));
 		        	history.add(etInput.getText().toString());
+		        	untouchedAfterCalculation = true;
 		        } catch (Exception e) {
 		        	Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 		        }
@@ -242,7 +250,7 @@ public class MainActivity extends Activity {
         btnPower.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("^");
+				putString("ANS^", "^");
 			}
         });
         
@@ -250,7 +258,7 @@ public class MainActivity extends Activity {
         btnFact.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("!");
+				putString("ANS!", "!");
 			}
         });
         
@@ -258,7 +266,7 @@ public class MainActivity extends Activity {
         btnMod.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("%");
+				putString("ANS%", "%");
 			}
         });
         
@@ -266,7 +274,7 @@ public class MainActivity extends Activity {
         btnComma.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString(",");
+				putString(",");
 			}
         });
         
@@ -274,7 +282,7 @@ public class MainActivity extends Activity {
         btnExp.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("e");
+				putString("e");
 			}
         });
         
@@ -282,7 +290,7 @@ public class MainActivity extends Activity {
         btnAns.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString("ANS");
+				putString("ANS");
 			}
         });
         
@@ -309,7 +317,7 @@ public class MainActivity extends Activity {
         btnDot.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				addString(".");
+				putString(".");
 			}
         });
     }
@@ -326,7 +334,7 @@ public class MainActivity extends Activity {
 				return;
 			switch (operation) {
 			case ADD:
-				addString(name);
+				putString(name);
 				break;
 			case DELETE:
 				if (name.equals("ANS") || name.equals("PI") || name.equals("E")) {
@@ -357,13 +365,14 @@ public class MainActivity extends Activity {
 			name = data.getStringExtra("name");
 			if (name.equals("null"))
 				return;
-			addString(name + '(');
+			putString(name + '(');
 			break;
 		case 3:
 			expr = data.getStringExtra("expr");
 			if (expr.equals("null"))
 				return;
-			etInput.setText(expr);
+			setString(expr);
+			untouchedAfterCalculation = false;
 			break;
 		}
 	}
@@ -394,7 +403,7 @@ public class MainActivity extends Activity {
 		case 5:
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);
 			builder.setTitle("Help")
-				.setMessage("LewisCalc v1.0 By Lewis Cheng (2011.09.14)")
+				.setMessage("LewisCalc v1.1 By Lewis Cheng (2011.12.27)")
 				.setCancelable(true)
 				.setPositiveButton("OK", null)
 				.create()
@@ -418,17 +427,39 @@ public class MainActivity extends Activity {
 		return super.onCreateOptionsMenu(menu);
     }
     
+    private void putString(String afterTouch, String beforeTouch)
+    {
+    	if (untouchedAfterCalculation) {
+			setString(afterTouch);
+			untouchedAfterCalculation = false;
+    	} else {
+			addString(beforeTouch);
+    	}
+    }
+    
+    private void putString(String text)
+    {
+    	putString(text, text);
+    }
+    
     private void addString(String c) {
     	int start = etInput.getSelectionStart();
     	etInput.getText().insert(start, c);
     }
     
+    private void setString(String c) {
+    	etInput.setText(c);
+    	etInput.setSelection(c.length());
+    }
+    
     private void clear() {
+    	untouchedAfterCalculation = false;
     	etInput.setText("");
     	tvResult.setText("0.0");
     }
     
     private void back() {
+    	untouchedAfterCalculation = false;
     	int start = etInput.getSelectionStart();
     	if (start == 0)
     		return;
